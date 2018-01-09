@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 public class Galgje {
 	
-	public static String teRadenWoord = "Anderen";
+	public static String teRadenWoord = "oefening";
 	public static boolean Win = false;
 	
 	static StringBuilder woord = new StringBuilder(teRadenWoord);
+	static StringBuilder fout = new StringBuilder("");
 	
 	public static void setWin (boolean b) {
 		Win = b; 
@@ -33,25 +34,26 @@ public class Galgje {
 	}
 	
 	
-	public static StringBuilder checkenOfLetterBestaat(String s) {
+	public static void checkenOfLetterBestaat(String s) {
 		System.out.println("Uw ingevoerde letter is: " + s);
 		
 		if(teRadenWoord.contains(s)) {
 			System.out.println("ja, komt voor");
 			char ch = s.charAt(0);
-			Galgje.toonWoord(ch);
-			return woord;
-			
+			Galgje.toonWoord(ch);			
 		}else {
 			System.out.println("nee, komt niet voor");
-			return woord;
+			fout.append(s);
 		}
 	}
 
 	
-	public static void endGame(boolean b) {
-		if(b==true) {
-		System.out.println("You win! Het woord was: " + teRadenWoord);
+	public static void endGame() {
+		if(Win==true) {
+		System.out.println("Gewonnen! Het woord is: " + teRadenWoord);
+		}
+		else {
+			System.out.println("Verloren... Het woord was: " + teRadenWoord);
 		}
 	}
 	
@@ -59,7 +61,8 @@ public class Galgje {
 		// TODO Auto-generated method stub
 		
 		
-		System.out.println("Welkom bij galgje");
+		System.out.println("Welkom bij galgje.");
+		System.out.println("Je hebt 10 pogingen.");
 		System.out.println("Het te raden woord:");
 		System.out.println(Galgje.zetWoord(teRadenWoord));
 		
@@ -76,13 +79,14 @@ public class Galgje {
 					setWin(true);
 					break;
 				}
-				System.out.println(woord);
+				System.out.println("Geraden letters: "+ fout);
+				System.out.println("Te raden woord: "+ woord);
 			}
 			
 		}
 		
 		
-		endGame(Win);
+		endGame();
 		
 		System.out.println("Het spel is klaar");
 		}
