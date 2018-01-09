@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Galgje {
 	
 	public static String teRadenWoord = "oefening";
+	public static int points = 10;
 	public static boolean Win = false;
 	
 	static StringBuilder woord = new StringBuilder(teRadenWoord);
@@ -44,6 +45,7 @@ public class Galgje {
 		}else {
 			System.out.println("nee, komt niet voor");
 			fout.append(s);
+			points = points - 1;
 		}
 	}
 
@@ -62,13 +64,13 @@ public class Galgje {
 		
 		
 		System.out.println("Welkom bij galgje.");
-		System.out.println("Je hebt 10 pogingen.");
+		System.out.println("Je hebt 10 punten en verliest een punt voor ieder fout geraden woord.");
 		System.out.println("Het te raden woord:");
 		System.out.println(Galgje.zetWoord(teRadenWoord));
 		
 		Scanner sc = new Scanner(System.in);
 		
-		for(int i = 0; i<10; i++) {
+		for(int i = 0; i<50; i++) {
 			String guess = sc.nextLine();
 			if(guess.equalsIgnoreCase(teRadenWoord)) {
 				setWin(true);
@@ -78,8 +80,11 @@ public class Galgje {
 				if(woord.toString().equalsIgnoreCase(teRadenWoord)) {
 					setWin(true);
 					break;
+				} else if (points <=0){
+					System.out.println("Geen punten meer...");
+					break;
 				}
-				System.out.println("Geraden letters: "+ fout);
+				System.out.println("Punten: " + points + "\t Fout geraden letters: "+ fout);
 				System.out.println("Te raden woord: "+ woord);
 			}
 			
